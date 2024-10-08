@@ -7,38 +7,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "voyages")
-public class Voyage implements Serializable {
+@NoArgsConstructor
+@Table(name = "role")
+public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String start;
-
-    private String destination;
-
-    @Column(name = "date_voyage")
-    private LocalDate dateVoyage;
-
-    private String time;
+    private String role;
 
     private String slug;
 
     @OneToMany
-    private List<Reservation> reservations;
-
-    @OneToMany
-    private List<Company> companies;
-
-    @OneToMany
-    private List<Seat> seats;
+    private List<User> users;
 }

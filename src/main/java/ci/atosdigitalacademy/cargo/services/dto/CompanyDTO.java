@@ -9,11 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompanyDTO {
+public class CompanyDTO extends UserDTO{
 
-    private Long id;
-    private String nom;
-    private String address;
-    private String contact;
-    private String slug;
+    private VoyageDTO voyage;
 }

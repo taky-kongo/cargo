@@ -6,13 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "seats")
-public class Seat {
+public class Seat implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +29,6 @@ public class Seat {
 
     private String slug;
 
-    @OneToOne(mappedBy = "seat")
-    private Reservation reservation;
+    @ManyToOne
+    private Voyage voyage;
 }

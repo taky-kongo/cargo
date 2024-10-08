@@ -14,10 +14,14 @@ import java.time.LocalDate;
 public class VoyageDTO {
 
     private Long id;
+
     private String start;
+
     private String destination;
+
     private LocalDate dateVoyage;
+
     private String time;
+
     private String slug;
-    private CompanyDTO company;
 }

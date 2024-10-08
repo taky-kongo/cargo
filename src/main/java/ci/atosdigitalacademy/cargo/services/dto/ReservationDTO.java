@@ -14,11 +14,12 @@ import java.time.LocalDate;
 public class ReservationDTO {
 
     private Long id;
+
     private LocalDate dateReservation;
+
     private String status;
+
     private String slug;
-    private UserDTO user;
+
     private VoyageDTO voyage;
-    private PaymentDTO payment;
-    private SeatDTO seat;
 }

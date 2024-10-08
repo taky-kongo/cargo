@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -14,7 +16,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "reservations")
-public class Reservation {
+public class Reservation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,18 +29,13 @@ public class Reservation {
 
     private String slug;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @OneToMany
+    private List<Client> clients;
 
     @ManyToOne
     @JoinColumn(name = "voyage_id")
     private Voyage voyage;
 
-    @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL)
-    private Payment payment;
-
-    @OneToOne
-    @JoinColumn(name = "seat_id")
-    private Seat seat;
+    @OneToMany
+    private List<Payment> payments;
 }

@@ -9,17 +9,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SeatDTO {
+public class RoleDTO {
 
     private Long id;
 
-    private String seatNumber;
-
-    private String classe;
-
-    private String status;
+    private String role;
 
     private String slug;
-
-    private VoyageDTO voyage;
 }
