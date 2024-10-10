@@ -36,8 +36,8 @@ public class Voyage implements Serializable {
     @OneToMany
     private List<Reservation> reservations;
 
-    @OneToMany
-    private List<Company> companies;
+    @ManyToOne
+    private Company company;
 
     @OneToMany
     private List<Seat> seats;

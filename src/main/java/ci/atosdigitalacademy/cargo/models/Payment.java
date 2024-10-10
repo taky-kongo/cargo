@@ -30,8 +30,4 @@ public class Payment implements Serializable {
 
     @ManyToOne
     private TypePayment typePayment;
-
-    @OneToOne
-    @JoinColumn(name = "reservation_id")
-    private Reservation reservation;
 }

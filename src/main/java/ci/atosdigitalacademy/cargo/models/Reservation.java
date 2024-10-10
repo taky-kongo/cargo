@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Getter
@@ -29,13 +28,13 @@ public class Reservation implements Serializable {
 
     private String slug;
 
-    @OneToMany
-    private List<Client> clients;
+    @ManyToOne
+    private Client client;
 
     @ManyToOne
     @JoinColumn(name = "voyage_id")
     private Voyage voyage;
 
-    @OneToMany
-    private List<Payment> payments;
+    @OneToOne
+    private Payment payment;
 }

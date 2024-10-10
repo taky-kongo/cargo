@@ -16,6 +16,6 @@ import java.util.List;
 @Table(name = "companies")
 public class Company extends User {
 
-    @ManyToOne
-    private Voyage voyage;
+    @OneToMany
+    private List<Voyage> voyages;
 }
