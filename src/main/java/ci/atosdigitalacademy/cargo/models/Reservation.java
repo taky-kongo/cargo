@@ -25,7 +25,17 @@ public class Reservation implements Serializable {
     @Column(name = "date_reservation")
     private LocalDate dateReservation;
 
+    @Column(name = "status")
     private String status;
+
+    @Column(name = "depart")
+    private  String depart;
+
+    @Column(name = "destination")
+    private String destination;
+
+    @Column(name = "nmbrTicket")
+    private  String  nmbrTicket;
 
     private String slug;
 
