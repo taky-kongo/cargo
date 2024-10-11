@@ -3,11 +3,14 @@ package ci.atosdigitalacademy.cargo.services.Impl;
 import ci.atosdigitalacademy.cargo.repository.RoleRepository;
 import ci.atosdigitalacademy.cargo.models.Role;
 import ci.atosdigitalacademy.cargo.services.RoleService;
+import ci.atosdigitalacademy.cargo.services.dto.ReservationDTO;
 import ci.atosdigitalacademy.cargo.services.dto.RoleDTO;
 import ci.atosdigitalacademy.cargo.services.mapper.RoleMapper;
+import ci.atosdigitalacademy.cargo.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +24,7 @@ public class RoleServiceImpl implements RoleService {
 
      private  final RoleRepository roleRepository;
      private  final RoleMapper roleMapper;
+     private final RoleService roleService;
 
     @Override
     public RoleDTO save(RoleDTO roleDTO) {
@@ -60,6 +64,12 @@ public class RoleServiceImpl implements RoleService {
 
     }
 
+    @GetMapping
+    public List<RoleDTO> getAll(){
+        log.debug("REST request to get All");
+        return roleService.findAll();
+    }
+
     @Override
     public Optional<RoleDTO> findOne(Long id) {
         log.debug("Request to get role user: {}", id);
@@ -67,6 +77,19 @@ public class RoleServiceImpl implements RoleService {
             return roleMapper.toDto(role);
         });
 
+    }
+
+    @Override
+    public RoleDTO saveRole(RoleDTO roleDTO) {
+        final String slug = SlugifyUtils.generate(roleDTO.getRole().toString());
+        roleDTO.setSlug(slug);
+        return save(roleDTO);
+    }
+
+    @Override
+    public RoleDTO updateTotal(RoleDTO roleDTO, Long id) {
+        roleDTO.setId(id);
+        return update(roleDTO);
     }
 
 

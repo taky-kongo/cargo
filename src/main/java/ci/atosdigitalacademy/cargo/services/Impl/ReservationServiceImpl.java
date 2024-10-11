@@ -10,6 +10,7 @@ import ci.atosdigitalacademy.cargo.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,7 @@ import java.util.Optional;
 public class ReservationServiceImpl implements ReservationService {
     private final ReservationRepository reservationRepository;
     private  final ReservationMapper reservationMapper;
+    private final ReservationService reservationService;
 
     @Override
     public ReservationDTO save(ReservationDTO reservationDTO) {
@@ -66,4 +68,18 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public void delete(Long id) { log.debug("Request to delete role user:{}",id); reservationRepository.deleteById(id);}}
+    public void delete(Long id) { log.debug("Request to delete role user:{}",id); reservationRepository.deleteById(id);}
+
+    @Override
+    public ReservationDTO updatetotal(ReservationDTO reservationDTO, Long id) {
+        reservationDTO.setId(id);
+        return update(reservationDTO);
+    }
+
+    @GetMapping
+    public List<ReservationDTO> getAll(){
+        log.debug("REST request to get All");
+        return reservationService.findAll();
+    }
+
+}

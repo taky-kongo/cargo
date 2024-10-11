@@ -15,6 +15,12 @@ public interface ReservationService {
     Optional<ReservationDTO> findOne(Long id);
 
     List<ReservationDTO> findAll();
+
     ReservationDTO saveReservation(ReservationDTO reservationDTO);
+
     void delete(Long id);
+
+    ReservationDTO updatetotal(ReservationDTO reservationDTO, Long id);
+
+
 }
