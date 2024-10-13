@@ -17,13 +17,11 @@ public class TypePaymentMapperImpl implements TypePaymentMapper {
 
     @Override
     public TypePayment toEntity(TypePaymentDTO dto) {
-        log.debug("Mapping TypePaymentDTO to TypePayment ");
         return modelMapper.map(dto, TypePayment.class);
     }
 
     @Override
     public TypePaymentDTO toDto(TypePayment entity) {
-        log.debug("Mapping TypePayment to TypePaymentDTO");
         return modelMapper.map(entity, TypePaymentDTO.class);
     }
 }

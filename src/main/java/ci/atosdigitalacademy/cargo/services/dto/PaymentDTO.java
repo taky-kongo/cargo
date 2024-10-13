@@ -22,6 +22,4 @@ public class PaymentDTO {
     private LocalDate datePayment;
 
     private TypePaymentDTO typePayment;
-
-    private ReservationDTO reservation;
 }

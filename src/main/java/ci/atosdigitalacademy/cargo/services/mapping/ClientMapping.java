@@ -1,0 +1,19 @@
+package ci.atosdigitalacademy.cargo.services.mapping;
+
+import ci.atosdigitalacademy.cargo.models.Client;
+import ci.atosdigitalacademy.cargo.services.dto.ClientDTO;
+
+public final class ClientMapping {
+
+    private ClientMapping() {}
+
+    public static void partialUpdate(Client client, ClientDTO clientDTO) {
+
+        if (clientDTO.getPassword() != null) {
+            client.setPassword(clientDTO.getPassword());
+        }
+        if (clientDTO.getEmail() != null) {
+            client.setEmail(clientDTO.getEmail());
+        }
+    }
+}

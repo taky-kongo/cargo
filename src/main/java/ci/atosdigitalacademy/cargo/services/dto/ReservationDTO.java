@@ -21,5 +21,9 @@ public class ReservationDTO {
 
     private String slug;
 
+    private ClientDTO client;
+
     private VoyageDTO voyage;
+
+    private PaymentDTO payment;
 }

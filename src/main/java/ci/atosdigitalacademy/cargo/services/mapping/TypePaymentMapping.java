@@ -8,9 +8,5 @@ public final class TypePaymentMapping {
     private TypePaymentMapping() {
     }
 
-    public static void partialUpdate(TypePayment typePayment, TypePaymentDTO typePaymentDTO) {
-        if (typePaymentDTO.getLabel() != null) {
-            typePayment.setLabel(typePaymentDTO.getLabel());
-        }
-    }
+    public static void partialUpdate(TypePayment typePayment, TypePaymentDTO typePaymentDTO) {}
 }
