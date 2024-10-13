@@ -1,7 +1,7 @@
 package ci.atosdigitalacademy.cargo.services.Impl;
 
 import ci.atosdigitalacademy.cargo.models.Voyage;
-import ci.atosdigitalacademy.cargo.repository.VoyageRepository;
+import ci.atosdigitalacademy.cargo.repositories.VoyageRepository;
 import ci.atosdigitalacademy.cargo.services.VoyageService;
 import ci.atosdigitalacademy.cargo.services.dto.VoyageDTO;
 import ci.atosdigitalacademy.cargo.services.mapper.VoyageMapper;

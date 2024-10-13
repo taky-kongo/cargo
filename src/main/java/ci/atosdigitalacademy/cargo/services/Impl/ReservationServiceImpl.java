@@ -1,7 +1,7 @@
 package ci.atosdigitalacademy.cargo.services.Impl;
 
 import ci.atosdigitalacademy.cargo.models.Reservation;
-import ci.atosdigitalacademy.cargo.repository.ReservationRepository;
+import ci.atosdigitalacademy.cargo.repositories.ReservationRepository;
 import ci.atosdigitalacademy.cargo.services.ReservationService;
 import ci.atosdigitalacademy.cargo.services.dto.ReservationDTO;
 import ci.atosdigitalacademy.cargo.services.mapper.ReservationMapper;

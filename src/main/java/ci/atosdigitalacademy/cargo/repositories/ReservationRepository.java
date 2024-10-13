@@ -1,4 +1,4 @@
-package ci.atosdigitalacademy.cargo.repository;
+package ci.atosdigitalacademy.cargo.repositories;
 
 import ci.atosdigitalacademy.cargo.models.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;

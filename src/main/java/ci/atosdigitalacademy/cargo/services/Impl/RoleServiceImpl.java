@@ -1,6 +1,6 @@
 package ci.atosdigitalacademy.cargo.services.Impl;
 
-import ci.atosdigitalacademy.cargo.repository.RoleRepository;
+import ci.atosdigitalacademy.cargo.repositories.RoleRepository;
 import ci.atosdigitalacademy.cargo.models.Role;
 import ci.atosdigitalacademy.cargo.services.RoleService;
 import ci.atosdigitalacademy.cargo.services.dto.RoleDTO;
