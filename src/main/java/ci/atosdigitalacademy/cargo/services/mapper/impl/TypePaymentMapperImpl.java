@@ -9,8 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-@Slf4j
 @RequiredArgsConstructor
+@Slf4j
 public class TypePaymentMapperImpl implements TypePaymentMapper {
 
     private final ModelMapper modelMapper;

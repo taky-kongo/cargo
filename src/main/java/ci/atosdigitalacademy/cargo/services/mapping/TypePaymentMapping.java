@@ -5,7 +5,8 @@ import ci.atosdigitalacademy.cargo.services.dto.TypePaymentDTO;
 
 public final class TypePaymentMapping {
 
-    private TypePaymentMapping() {}
+    private TypePaymentMapping() {
+    }
 
     public static void partialUpdate(TypePayment typePayment, TypePaymentDTO typePaymentDTO) {}
 }
