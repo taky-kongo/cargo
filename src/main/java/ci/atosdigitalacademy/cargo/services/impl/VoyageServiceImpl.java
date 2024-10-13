@@ -1,4 +1,4 @@
-package ci.atosdigitalacademy.cargo.services.Impl;
+package ci.atosdigitalacademy.cargo.services.impl;
 
 import ci.atosdigitalacademy.cargo.models.Voyage;
 import ci.atosdigitalacademy.cargo.repositories.VoyageRepository;

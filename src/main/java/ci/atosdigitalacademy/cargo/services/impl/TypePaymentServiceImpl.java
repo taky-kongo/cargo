@@ -1,4 +1,4 @@
-package ci.atosdigitalacademy.cargo.services.Impl;
+package ci.atosdigitalacademy.cargo.services.impl;
 
 import ci.atosdigitalacademy.cargo.models.TypePayment;
 import ci.atosdigitalacademy.cargo.repositories.TypePaymentRepository;
