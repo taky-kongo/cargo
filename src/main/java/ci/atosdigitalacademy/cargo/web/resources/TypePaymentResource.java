@@ -22,12 +22,13 @@ import java.util.Optional;
 @Slf4j
 @RequestMapping("/api/typePayments")
 public class TypePaymentResource {
+
     private final TypePaymentService typePaymentService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiResponse(responseCode = "201", description = "Request to save typePayment")
-    @Operation(summary = "Save a new typePayment", description = "This endpoint allow to save typePayment")
+    @ApiResponse(responseCode = "201", description = "Request to save type payment")
+    @Operation(summary = "Save a new type payment", description = "This endpoint allow to save type payment")
     public TypePaymentDTO saveTypePayment(@RequestBody TypePaymentDTO typePayment) {
         log.debug("Rest request to save TypePayment : {}", typePayment);
         return typePaymentService.saveTypePayment(typePayment);
@@ -35,13 +36,13 @@ public class TypePaymentResource {
 
     @GetMapping("/{id}")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Request to get typePayment by id"),
-            @ApiResponse(responseCode = "404", description = "typePayment not found", content = @Content(schema = @Schema(implementation = String.class)))
+            @ApiResponse(responseCode = "200", description = "Request to get type payment by id"),
+            @ApiResponse(responseCode = "404", description = "type payment not found", content = @Content(schema = @Schema(implementation = String.class)))
     })
     public ResponseEntity<?> getTypePaymentById(
             @Parameter(required = true, description = "ID of typePayment to be retrieved")
             @PathVariable Long id) {
-        log.debug("Rest request to get TypePayment by id : {}", id);
+        log.debug("Rest request to get type payment by id : {}", id);
         Optional<TypePaymentDTO> typePayment = typePaymentService.findOne(id);
         if (typePayment.isPresent()) {
             return new ResponseEntity<>(typePayment.get(), HttpStatus.OK);
@@ -58,7 +59,7 @@ public class TypePaymentResource {
     public ResponseEntity<?> getTypePaymentBySlug(
             @Parameter(required = true, description = "Slug of to be retrieved")
             @PathVariable String slug) {
-        log.debug("Rest request to get typePayment by slug : {}", slug);
+        log.debug("Rest request to get type payment by slug : {}", slug);
         Optional<TypePaymentDTO> typePayment = typePaymentService.findBySlug(slug);
         if (typePayment.isPresent()) {
             return new ResponseEntity<>(typePayment.get(), HttpStatus.OK);
@@ -69,7 +70,7 @@ public class TypePaymentResource {
 
     @GetMapping
     @ApiResponse(responseCode = "200", description = "Request to get all typePayment")
-    @Operation(summary = "Get all typePayment", description = "This endpoint allow to get all typePayment")
+    @Operation(summary = "Get all typePayment", description = "This endpoint allow to get all type payment")
     public List<TypePaymentDTO> getAllTypePayment() {
         log.debug("Rest request to get all typePayment");
         return typePaymentService.findAllTypePayment();
@@ -82,15 +83,6 @@ public class TypePaymentResource {
     public TypePaymentDTO updateTypePayment(@RequestBody TypePaymentDTO typePayment, @PathVariable Long id) {
         log.debug("Rest request to update TypePayment : {}", typePayment);
         return typePaymentService.updateTypePayment( typePayment, id);
-    }
-
-    @PatchMapping("/update/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    @ApiResponse(responseCode = "200", description = "Request to partial update typePayment")
-    @Operation(summary = "Update typePayment", description = "This endpoint allow to partial update typePayment")
-    public TypePaymentDTO partialUpdate(@PathVariable Long id, @RequestBody TypePaymentDTO typePayment) {
-        log.debug("Rest request to partial update typePayment : {}", typePayment);
-        return typePaymentService.partialUpdate(typePayment, id);
     }
 
     @DeleteMapping("/{id}")

@@ -1,8 +1,6 @@
 package ci.atosdigitalacademy.cargo.services.mapper.impl;
 
-import ci.atosdigitalacademy.cargo.models.Company;
 import ci.atosdigitalacademy.cargo.models.TypePayment;
-import ci.atosdigitalacademy.cargo.services.dto.CompanyDTO;
 import ci.atosdigitalacademy.cargo.services.dto.TypePaymentDTO;
 import ci.atosdigitalacademy.cargo.services.mapper.TypePaymentMapper;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +12,9 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 public class TypePaymentMapperImpl implements TypePaymentMapper {
+
     private final ModelMapper modelMapper;
+
     @Override
     public TypePayment toEntity(TypePaymentDTO dto) {
         log.debug("Mapping TypePaymentDTO to TypePayment ");

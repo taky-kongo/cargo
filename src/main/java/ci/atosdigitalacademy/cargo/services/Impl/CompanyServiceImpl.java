@@ -18,32 +18,42 @@ import java.util.Optional;
 @Slf4j
 @Service
 public class CompanyServiceImpl implements CompanyService {
+
     private final CompanyMapper companyMapper;
     private final CompanyRepository companyRepository;
+
     @Override
-    public CompanyDTO saveCompany(CompanyDTO companyDTO) {
-        log.debug("Request to sva Company: {}", companyDTO);
-        companyDTO.setSlug(SlugifyUtils.generate("qezsesz"));
-        Company company= companyMapper.toEntity(companyDTO);
-        company=companyRepository.save(company);
+    public CompanyDTO save(CompanyDTO companyDTO) {
+        log.debug("Request to save Company : {}", companyDTO);
+        Company company = companyMapper.toEntity(companyDTO);
+        company = companyRepository.save(company);
         return companyMapper.toDto(company);
     }
 
     @Override
+    public CompanyDTO saveCompany(CompanyDTO companyDTO) {
+        log.debug("Request to save Company: {} with slug", companyDTO);
+        final String slug = SlugifyUtils.generate(String.valueOf(companyDTO.getName()));
+        companyDTO.setSlug(slug);
+        return save(companyDTO);
+    }
+
+    @Override
     public CompanyDTO updateCompany(CompanyDTO companyDTO) {
+        log.debug("Request to update Company : {}", companyDTO);
         return findOne(companyDTO.getId()).map(company -> {
             company.setName(companyDTO.getName());
             company.setEmail(companyDTO.getEmail());
             company.setDateCreation(companyDTO.getDateCreation());
             company.setPassword(companyDTO.getPassword());
-            company.setRole(companyDTO.getRole());
-            return saveCompany(company);
-        }).orElseThrow(() -> new IllegalArgumentException());
+            company.setPhoneNumber(companyDTO.getPhoneNumber());
+            return save(company);
+        }).orElseThrow(() -> new IllegalArgumentException("Company not found"));
     }
 
     @Override
     public CompanyDTO updateCompany(CompanyDTO companyDTO, Long id) {
-        log.debug("Request to update :{} ",id);
+        log.debug("Request to update company: {} by id {}", companyDTO, id);
         companyDTO.setId(id);
         return updateCompany(companyDTO);
     }
@@ -58,7 +68,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Optional<CompanyDTO> findOne(Long id) {
-        log.debug("Request to get Company : {}",id);
+        log.debug("Request to get Company: {}",id);
         return companyRepository.findById(id).map(company -> {
             return companyMapper.toDto(company);
         });
@@ -66,7 +76,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Optional<CompanyDTO> findBySlug(String slug) {
-      log.debug("Request to get Company by slug ");
+      log.debug("Request to get Company by slug: {}", slug);
       return companyRepository.findCompanyBySlug(slug).map(company -> {
           return companyMapper.toDto(company);
       });

@@ -26,9 +26,5 @@ public final class CompanyMapping {
         if (companyDTO.getDateCreation() != null) {
             company.setDateCreation(companyDTO.getDateCreation());
         }
-        if (companyDTO.getRole() != null) {
-            company.setRole(company.getRole());
-        }
-
     }
 }

@@ -26,5 +26,5 @@ public class TypePayment implements Serializable {
     private String slug;
 
     @OneToMany
-    private List<TypePayment> typePayments;
+    private List<Payment> payments;
 }

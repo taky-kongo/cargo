@@ -12,7 +12,9 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 public class CompanyMapperImpl implements CompanyMapper {
+
     private final ModelMapper modelMapper;
+
     @Override
     public Company toEntity(CompanyDTO dto) {
         log.debug("Mapping CompanyDTO to Company ");

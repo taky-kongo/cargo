@@ -98,7 +98,7 @@ public class CompanyResource {
     @ApiResponse(responseCode = "200", description = "Request to delete company")
     @Operation(summary = "Delete company", description = "This endpoint allow delete company")
     public void deleteCompany(@PathVariable Long id) {
-        log.debug("Rest request to delete comapny : {}", id);
+        log.debug("Rest request to delete company : {}", id);
         companyService.deleteCompany(id);
     }
 }
