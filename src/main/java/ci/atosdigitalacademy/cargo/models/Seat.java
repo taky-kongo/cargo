@@ -20,8 +20,8 @@ public class Seat implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "seat_number")
-    private String seatNumber;
+    @Column(name = "seat_number", unique = true)
+    private int seatNumber;
 
     private String classe;
 

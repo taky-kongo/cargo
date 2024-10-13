@@ -13,7 +13,7 @@ public class SeatDTO {
 
     private Long id;
 
-    private String seatNumber;
+    private int seatNumber;
 
     private String classe;
 

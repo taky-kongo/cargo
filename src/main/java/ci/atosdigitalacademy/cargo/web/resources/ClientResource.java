@@ -57,7 +57,7 @@ public class ClientResource {
             @ApiResponse(responseCode = "404", description = "Client not found", content = @Content(schema = @Schema(implementation = String.class)))
     })
     public ResponseEntity<?> getClientBySlug(
-            @Parameter(required = true, description = "Slug of to be retrieved")
+            @Parameter(required = true, description = "Slug of client to be retrieved")
             @PathVariable String slug) {
         log.debug("Rest request to get client by slug : {}", slug);
         Optional<ClientDTO> client = clientService.findBySlug(slug);
