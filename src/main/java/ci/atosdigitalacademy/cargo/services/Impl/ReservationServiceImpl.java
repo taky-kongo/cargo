@@ -80,7 +80,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public ReservationDTO updatetotal(ReservationDTO reservationDTO, Long id) {
+    public ReservationDTO updateTotal(ReservationDTO reservationDTO, Long id) {
         log.debug("Request to update reservation {} by id", reservationDTO);
         reservationDTO.setId(id);
         return update(reservationDTO);

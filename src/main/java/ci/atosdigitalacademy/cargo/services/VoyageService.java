@@ -1,6 +1,5 @@
 package ci.atosdigitalacademy.cargo.services;
 
-import ci.atosdigitalacademy.cargo.services.dto.ReservationDTO;
 import ci.atosdigitalacademy.cargo.services.dto.VoyageDTO;
 
 import java.util.List;
@@ -14,12 +13,13 @@ public interface VoyageService {
 
     Optional<VoyageDTO> findOne(Long id);
 
+    Optional<VoyageDTO> findOneBySlug(String slug);
+
     List<VoyageDTO> findAll();
 
     VoyageDTO saveVoyage(VoyageDTO voyageDTO);
 
     void delete(Long id);
 
-    VoyageDTO updatetotal(VoyageDTO voyageDTO, Long id);
-
+    VoyageDTO updateTotal(VoyageDTO voyageDTO, Long id);
 }

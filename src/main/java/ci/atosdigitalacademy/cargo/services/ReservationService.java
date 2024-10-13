@@ -1,6 +1,5 @@
 package ci.atosdigitalacademy.cargo.services;
 
-import ci.atosdigitalacademy.cargo.models.Reservation;
 import ci.atosdigitalacademy.cargo.services.dto.ReservationDTO;
 
 import java.util.List;
@@ -22,6 +21,6 @@ public interface ReservationService {
 
     void delete(Long id);
 
-    ReservationDTO updatetotal(ReservationDTO reservationDTO, Long id);
+    ReservationDTO updateTotal(ReservationDTO reservationDTO, Long id);
 
 }

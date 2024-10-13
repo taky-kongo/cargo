@@ -37,7 +37,7 @@ public class ReservationResource {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     @ApiResponse(responseCode = "200", description = "Request to delete reservation")
-    @Operation(summary = "Delete client", description = "This endpoint allow delete reservation")
+    @Operation(summary = "Delete reservation", description = "This endpoint allow delete reservation")
     public void delete(@PathVariable Long id) {
         log.info("REST Request to delete Reservation : {}", id);
         reservationService.delete(id);
@@ -49,7 +49,7 @@ public class ReservationResource {
     @ResponseStatus(HttpStatus.OK)
     public ReservationDTO update(@RequestBody ReservationDTO reservationDTO, @PathVariable Long id){
         log.debug("REST request to update reservation {}", reservationDTO);
-        return reservationService.updatetotal(reservationDTO, id);
+        return reservationService.updateTotal(reservationDTO, id);
     }
 
     @GetMapping("/{id}")
