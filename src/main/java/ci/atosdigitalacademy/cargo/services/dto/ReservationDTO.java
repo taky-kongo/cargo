@@ -21,11 +21,7 @@ public class ReservationDTO {
 
     private String slug;
 
-    private  String depart;
-
-    private String destination;
-
-    private  String  nmbrTicket;
-
     private VoyageDTO voyage;
+
+    private PaymentDTO payment;
 }

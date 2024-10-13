@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,4 +25,10 @@ public class VoyageDTO {
     private String time;
 
     private String slug;
+
+    private List<ReservationDTO> reservations;
+
+    private CompanyDTO company;
+
+    private List<SeatDTO> seats;
 }
