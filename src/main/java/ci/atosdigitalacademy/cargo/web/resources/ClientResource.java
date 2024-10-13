@@ -1,4 +1,4 @@
-package ci.atosdigitalacademy.cargo.web.resource;
+package ci.atosdigitalacademy.cargo.web.resources;
 
 import ci.atosdigitalacademy.cargo.services.ClientService;
 import ci.atosdigitalacademy.cargo.services.dto.ClientDTO;
