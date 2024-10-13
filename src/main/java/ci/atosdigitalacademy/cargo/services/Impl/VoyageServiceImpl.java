@@ -1,13 +1,10 @@
 package ci.atosdigitalacademy.cargo.services.Impl;
 
-import ci.atosdigitalacademy.cargo.models.Reservation;
 import ci.atosdigitalacademy.cargo.models.Voyage;
 import ci.atosdigitalacademy.cargo.repository.VoyageRepository;
 import ci.atosdigitalacademy.cargo.services.VoyageService;
-import ci.atosdigitalacademy.cargo.services.dto.ReservationDTO;
 import ci.atosdigitalacademy.cargo.services.dto.VoyageDTO;
 import ci.atosdigitalacademy.cargo.services.mapper.VoyageMapper;
-import ci.atosdigitalacademy.cargo.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,9 +17,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 
 public class VoyageServiceImpl implements VoyageService {
+
     private  final VoyageRepository voyageRepository;
     private  final VoyageMapper voyageMapper;
-    private final VoyageService voyageService;
 
     @Override
     public VoyageDTO save(VoyageDTO voyageDTO) {
@@ -61,10 +58,8 @@ public class VoyageServiceImpl implements VoyageService {
     }
 
     @Override
-    public VoyageDTO saveReservation(VoyageDTO voyageDTO) {
-        final String slug = SlugifyUtils.generate(voyageDTO.getDestination().toString());
-        voyageDTO.setSlug(slug);
-        return save(voyageDTO);
+    public VoyageDTO saveVoyage(VoyageDTO voyageDTO) {
+        return null;
     }
 
     @Override
@@ -81,7 +76,9 @@ public class VoyageServiceImpl implements VoyageService {
     @GetMapping
     public List<VoyageDTO> getAll(){
         log.debug("REST request to get All");
-        return voyageService.findAll();
+        return voyageRepository.findAll().stream().map(voyage -> {
+            return voyageMapper.toDto(voyage);
+        }).toList();
     }
 
 }

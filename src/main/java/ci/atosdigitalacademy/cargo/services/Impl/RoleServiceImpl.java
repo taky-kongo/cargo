@@ -24,7 +24,6 @@ public class RoleServiceImpl implements RoleService {
 
      private  final RoleRepository roleRepository;
      private  final RoleMapper roleMapper;
-     private final RoleService roleService;
 
     @Override
     public RoleDTO save(RoleDTO roleDTO) {
@@ -67,7 +66,9 @@ public class RoleServiceImpl implements RoleService {
     @GetMapping
     public List<RoleDTO> getAll(){
         log.debug("REST request to get All");
-        return roleService.findAll();
+        return roleRepository.findAll().stream().map(role -> {
+            return roleMapper.toDto(role);
+        }).toList();
     }
 
     @Override

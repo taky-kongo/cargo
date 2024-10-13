@@ -14,6 +14,8 @@ public interface ReservationService {
 
     Optional<ReservationDTO> findOne(Long id);
 
+    Optional<ReservationDTO> findOneBySlug(String slug);
+
     List<ReservationDTO> findAll();
 
     ReservationDTO saveReservation(ReservationDTO reservationDTO);
@@ -21,6 +23,5 @@ public interface ReservationService {
     void delete(Long id);
 
     ReservationDTO updatetotal(ReservationDTO reservationDTO, Long id);
-
 
 }
