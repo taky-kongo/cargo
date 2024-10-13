@@ -17,7 +17,7 @@ public class VoyageMapperImpl implements VoyageMapper {
 
     @Override
     public Voyage toEntity(VoyageDTO dto) {
-        modelMapper.map(dto, Voyage.class);
+        return modelMapper.map(dto, Voyage.class);
     }
 
     @Override
