@@ -7,5 +7,13 @@ public final class ClientMapping {
 
     private ClientMapping() {}
 
-    public static void partialUpdate(Client client, ClientDTO clientDTO) {}
+    public static void partialUpdate(Client client, ClientDTO clientDTO) {
+
+        if (clientDTO.getPassword() != null) {
+            client.setPassword(clientDTO.getPassword());
+        }
+        if (clientDTO.getEmail() != null) {
+            client.setEmail(clientDTO.getEmail());
+        }
+    }
 }
