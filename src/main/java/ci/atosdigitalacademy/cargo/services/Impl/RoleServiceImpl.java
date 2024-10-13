@@ -3,14 +3,12 @@ package ci.atosdigitalacademy.cargo.services.Impl;
 import ci.atosdigitalacademy.cargo.repository.RoleRepository;
 import ci.atosdigitalacademy.cargo.models.Role;
 import ci.atosdigitalacademy.cargo.services.RoleService;
-import ci.atosdigitalacademy.cargo.services.dto.ReservationDTO;
 import ci.atosdigitalacademy.cargo.services.dto.RoleDTO;
 import ci.atosdigitalacademy.cargo.services.mapper.RoleMapper;
 import ci.atosdigitalacademy.cargo.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +25,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleDTO save(RoleDTO roleDTO) {
-        log.debug("Request to update role user: {}", roleDTO);
+        log.debug("Request to save role: {}", roleDTO);
         Role role = roleMapper.toEntity(roleDTO);
         role = roleRepository.save(role);
         return roleMapper.toDto(role);
@@ -39,15 +37,19 @@ public class RoleServiceImpl implements RoleService {
         return findOne(roleDTO.getId()).map(existingRole->{
             existingRole.setRole(roleDTO.getRole());
             return save(existingRole);
-        }).orElseThrow(() -> new IllegalArgumentException());
+        }).orElseThrow(() -> new IllegalArgumentException("Role not found"));
     }
 
     @Override
-    public void delete(Long id) {log.debug("Request to delete role user:{}",id); roleRepository.deleteById(id);}
+    public void delete(Long id) {
+        log.debug("Request to delete role user:{}",id);
+        roleRepository.deleteById(id);
+    }
 
 
     @Override
     public Set<RoleDTO> findByRole(String roleUser) {
+        log.debug("Request to get roles: {} by role",roleUser);
         return roleRepository.findByRole(roleUser).stream().map(role->{
             return  roleMapper.toDto(role);
         }).collect(Collectors.toSet());
@@ -56,16 +58,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<RoleDTO> findAll() {
-        log.debug("Request to find");
-        return roleRepository.findAll().stream().map(role -> {
-            return roleMapper.toDto(role);
-        }).toList();
-
-    }
-
-    @GetMapping
-    public List<RoleDTO> getAll(){
-        log.debug("REST request to get All");
+        log.debug("Request to find all roles");
         return roleRepository.findAll().stream().map(role -> {
             return roleMapper.toDto(role);
         }).toList();
@@ -81,17 +74,25 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public Optional<RoleDTO> findBySlug(String slug) {
+        log.debug("Request to get role by slug: {}", slug);
+        return roleRepository.findBySlug(slug).map(role -> {
+            return roleMapper.toDto(role);
+        });
+    }
+
+    @Override
     public RoleDTO saveRole(RoleDTO roleDTO) {
-        final String slug = SlugifyUtils.generate(roleDTO.getRole().toString());
+        log.debug("Request to save role: {} with slug", roleDTO);
+        final String slug = SlugifyUtils.generate(String.valueOf(roleDTO.getRole()));
         roleDTO.setSlug(slug);
         return save(roleDTO);
     }
 
     @Override
     public RoleDTO updateTotal(RoleDTO roleDTO, Long id) {
+        log.debug("Request to update total role: {} with id: {}", roleDTO, id);
         roleDTO.setId(id);
         return update(roleDTO);
     }
-
-
 }

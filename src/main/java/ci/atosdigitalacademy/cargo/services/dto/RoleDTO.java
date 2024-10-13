@@ -18,6 +18,4 @@ public class RoleDTO {
     private String role;
 
     private String slug;
-
-    private List<UserDTO> users;
 }

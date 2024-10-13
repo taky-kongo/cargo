@@ -1,7 +1,5 @@
 package ci.atosdigitalacademy.cargo.services;
 
-import ci.atosdigitalacademy.cargo.models.Role;
-import ci.atosdigitalacademy.cargo.services.dto.ReservationDTO;
 import ci.atosdigitalacademy.cargo.services.dto.RoleDTO;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +18,8 @@ public interface RoleService {
     List<RoleDTO> findAll();
 
     Optional<RoleDTO> findOne(Long id);
+
+    Optional<RoleDTO> findBySlug(String slug);
 
     RoleDTO saveRole(RoleDTO roleDTO);
 
