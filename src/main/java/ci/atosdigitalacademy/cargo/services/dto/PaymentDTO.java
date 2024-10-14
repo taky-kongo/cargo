@@ -1,5 +1,6 @@
 package ci.atosdigitalacademy.cargo.services.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,5 +22,6 @@ public class PaymentDTO {
 
     private LocalDate datePayment;
 
+    @JsonIgnoreProperties({"payments"})
     private TypePaymentDTO typePayment;
 }

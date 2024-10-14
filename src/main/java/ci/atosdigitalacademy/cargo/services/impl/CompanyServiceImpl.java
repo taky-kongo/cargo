@@ -90,7 +90,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyDTO partialUpdate(CompanyDTO companyDTO, Long id) {
-        log.debug("Request to partial update Company by id : {}", companyDTO);
+        log.debug("Request to partial update Company by id : {}", id);
         return companyRepository.findById(id).map(company -> {
             CompanyMapping.partialUpdate(company, companyDTO);
             return company;
