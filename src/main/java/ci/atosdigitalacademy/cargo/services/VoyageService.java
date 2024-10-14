@@ -2,6 +2,7 @@ package ci.atosdigitalacademy.cargo.services;
 
 import ci.atosdigitalacademy.cargo.services.dto.VoyageDTO;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,4 +23,7 @@ public interface VoyageService {
     void delete(Long id);
 
     VoyageDTO updateTotal(VoyageDTO voyageDTO, Long id);
+
+    List<VoyageDTO> findByStartAndDestinationOrDateVoyage(String start, String destination, LocalDate date);
+
 }
