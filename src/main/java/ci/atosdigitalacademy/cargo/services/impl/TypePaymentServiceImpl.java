@@ -31,25 +31,28 @@ public class TypePaymentServiceImpl implements TypePaymentService {
 
     @Override
     public TypePaymentDTO saveTypePayment(TypePaymentDTO typePaymentDTO) {
-        log.debug("Request to update: {} ", typePaymentDTO);
         log.debug("Request to save type payment: {} with slug", typePaymentDTO);
         final String slug = SlugifyUtils.generate(String.valueOf(typePaymentDTO.getLabel()));
         typePaymentDTO.setSlug(slug);
         return save(typePaymentDTO);
     }
+
     @Override
     public TypePaymentDTO updateTypePayment(TypePaymentDTO typePaymentDTO) {
+        log.debug("Request to update type payment {}", typePaymentDTO);
         return findOne(typePaymentDTO.getId()).map(typePayment -> {
             typePayment.setLabel(typePaymentDTO.getLabel());
             return save(typePayment);
         }).orElseThrow(() -> new IllegalArgumentException("Type payment not found"));
     }
+
     @Override
     public TypePaymentDTO updateTypePayment(TypePaymentDTO typePaymentDTO, Long id) {
         log.debug("Request to update: {} with id {}",typePaymentDTO, id);
         typePaymentDTO.setId(id);
         return updateTypePayment(typePaymentDTO);
     }
+
     @Override
     public List<TypePaymentDTO> findAllTypePayment() {
         log.debug("Request to get all typePayment");
@@ -57,6 +60,7 @@ public class TypePaymentServiceImpl implements TypePaymentService {
             return typePaymentMapper.toDto(typePayment);
         }).toList();
     }
+
     @Override
     public Optional<TypePaymentDTO> findOne(Long id) {
         log.debug("Request to get TypePayment : {}",id);
@@ -64,6 +68,7 @@ public class TypePaymentServiceImpl implements TypePaymentService {
             return typePaymentMapper.toDto(typePayment);
         });
     }
+
     @Override
     public Optional<TypePaymentDTO> findBySlug(String slug) {
         log.debug("Request to get TypePayment by slug ");
@@ -71,6 +76,7 @@ public class TypePaymentServiceImpl implements TypePaymentService {
             return typePaymentMapper.toDto(typePayment);
         });
     }
+
     @Override
     public void deleteTypePayment(Long id) {
         log.debug("Request to delete typePayment :{}", id);
