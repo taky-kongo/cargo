@@ -48,11 +48,11 @@ public class RoleServiceImpl implements RoleService {
 
 
     @Override
-    public Set<RoleDTO> findByRole(String roleUser) {
-        log.debug("Request to get roles: {} by role",roleUser);
-        return roleRepository.findByRole(roleUser).stream().map(role->{
+    public Optional<RoleDTO> findByRole(String roleUser) {
+        log.debug("Request to get role: {} by role",roleUser);
+        return roleRepository.findByRole(roleUser).map(role->{
             return  roleMapper.toDto(role);
-        }).collect(Collectors.toSet());
+        });
     }
 
 
@@ -94,5 +94,16 @@ public class RoleServiceImpl implements RoleService {
         log.debug("Request to update total role: {} with id: {}", roleDTO, id);
         roleDTO.setId(id);
         return update(roleDTO);
+    }
+
+    @Override
+    public void initRoles(List<RoleDTO> roleUsers) {
+        log.debug("Request to init roles {}", roleUsers);
+        List<RoleDTO> roles = findAll();
+        if (roles.isEmpty() || roles.size() < roleUsers.size()){
+            roleUsers.forEach(role->{
+                saveRole(role);
+            });
+        }
     }
 }

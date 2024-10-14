@@ -1,5 +1,6 @@
 package ci.atosdigitalacademy.cargo.services.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,5 +28,6 @@ public class UserDTO {
 
     private String slug;
 
+    @JsonIgnoreProperties({"id"})
     private RoleDTO role;
 }

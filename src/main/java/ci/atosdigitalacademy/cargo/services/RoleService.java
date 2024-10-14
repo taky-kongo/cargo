@@ -13,7 +13,7 @@ public interface RoleService {
 
     void delete (Long id);
 
-    Set<RoleDTO> findByRole(String roleUser);
+    Optional<RoleDTO> findByRole(String roleUser);
 
     List<RoleDTO> findAll();
 
@@ -24,5 +24,7 @@ public interface RoleService {
     RoleDTO saveRole(RoleDTO roleDTO);
 
     RoleDTO updateTotal(RoleDTO roleDTO, Long id);
+
+    void initRoles(List<RoleDTO> roleUsers);
 
 }
