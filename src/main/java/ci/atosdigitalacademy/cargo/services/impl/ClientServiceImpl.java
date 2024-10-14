@@ -2,8 +2,11 @@ package ci.atosdigitalacademy.cargo.services.impl;
 
 import ci.atosdigitalacademy.cargo.models.Client;
 import ci.atosdigitalacademy.cargo.repositories.ClientRepository;
+import ci.atosdigitalacademy.cargo.security.AuthorityConstants;
 import ci.atosdigitalacademy.cargo.services.ClientService;
+import ci.atosdigitalacademy.cargo.services.RoleService;
 import ci.atosdigitalacademy.cargo.services.dto.ClientDTO;
+import ci.atosdigitalacademy.cargo.services.dto.RoleDTO;
 import ci.atosdigitalacademy.cargo.services.mapper.ClientMapper;
 import ci.atosdigitalacademy.cargo.services.mapping.ClientMapping;
 import ci.atosdigitalacademy.cargo.utils.SlugifyUtils;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -21,10 +25,17 @@ public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
+    private final RoleService roleService;
 
     @Override
     public ClientDTO save(ClientDTO clientDTO) {
         log.debug("Request to save client {}", clientDTO);
+        Optional<RoleDTO> roles = roleService.findByRole(AuthorityConstants.ROLE_USER);
+        RoleDTO role = new RoleDTO();
+        if (roles.isPresent()) {
+            role = roles.get();
+        }
+        clientDTO.setRole(role);
         Client client = clientMapper.toEntity(clientDTO);
         client = clientRepository.save(client);
         return clientMapper.toDto(client);
