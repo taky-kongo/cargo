@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -94,5 +95,13 @@ public class VoyageResource {
     public List<VoyageDTO> getAllVoyages(){
         log.debug("REST request to get all voyages");
         return voyageService.findAll();
+    }
+
+    @GetMapping("/search/{start}/{destination}/{date}/")
+    @ApiResponse(responseCode = "200", description = "Request to get voyages by search")
+    @Operation(summary = "Get voyages", description = "This endpoint allow to voyages")
+    public List<VoyageDTO> getVoyagesBySearch(@PathVariable String start, @PathVariable String destination, @PathVariable LocalDate date) {
+        log.debug("REST request to get voyages by search");
+        return voyageService.findByStartAndDestinationOrDateVoyage(start, destination, date);
     }
 }

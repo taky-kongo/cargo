@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,6 +86,14 @@ public class VoyageServiceImpl implements VoyageService {
         log.debug("Request to update total voyage: {} with id {}",voyageDTO,id);
         voyageDTO.setId(id);
         return update(voyageDTO);
+    }
+
+    @Override
+    public List<VoyageDTO> findByStartAndDestinationOrDateVoyage(String start, String destination, LocalDate date) {
+        log.debug("Request to get voyage by start and destination");
+        return voyageRepository.findByStartIgnoreCaseAndDestinationIgnoreCaseAndDateVoyageGreaterThanEqual(start, destination, date).stream().map(voyage -> {
+            return voyageMapper.toDto(voyage);
+        }).toList();
     }
 
     @GetMapping
