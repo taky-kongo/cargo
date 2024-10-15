@@ -28,4 +28,6 @@ public interface ClientService {
     void delete(Long id);
 
     ResponseRegisterClientDTO registerStudent(RegistrationClientDTO registrationClientDTO);
+
+    Optional<ClientDTO> findClientByUserId(Long userId);
 }

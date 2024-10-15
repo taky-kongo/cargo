@@ -125,4 +125,11 @@ public class ClientServiceImpl implements ClientService {
         responseRegisterClientDTO.setUser(user);
         return responseRegisterClientDTO;
     }
+
+    @Override
+    public Optional<ClientDTO> findClientByUserId(Long userId) {
+        return clientRepository.findClientByUserId(userId).map(client -> {
+            return clientMapper.toDto(client);
+        });
+    }
 }
