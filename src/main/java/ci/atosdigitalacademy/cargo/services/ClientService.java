@@ -1,6 +1,8 @@
 package ci.atosdigitalacademy.cargo.services;
 
 import ci.atosdigitalacademy.cargo.services.dto.ClientDTO;
+import ci.atosdigitalacademy.cargo.services.dto.RegistrationClientDTO;
+import ci.atosdigitalacademy.cargo.services.dto.ResponseRegisterClientDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,4 +26,6 @@ public interface ClientService {
     List<ClientDTO> findAll();
 
     void delete(Long id);
+
+    ResponseRegisterClientDTO registerStudent(RegistrationClientDTO registrationClientDTO);
 }

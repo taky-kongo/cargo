@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompanyDTO extends UserDTO{
+public class CompanyDTO extends PersonDTO {
 
     private List<VoyageDTO> voyages;
 }

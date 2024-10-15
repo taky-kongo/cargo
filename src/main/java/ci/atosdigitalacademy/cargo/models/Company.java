@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "companies")
-public class Company extends User {
+public class Company extends Person {
 
     @OneToMany
     private List<Voyage> voyages;

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Getter
@@ -24,7 +23,4 @@ public class Role implements Serializable {
     private String role;
 
     private String slug;
-
-    @OneToMany
-    private List<User> users;
 }

@@ -17,9 +17,6 @@ public final class CompanyMapping {
         if (companyDTO.getEmail() != null) {
             company.setEmail(companyDTO.getEmail());
         }
-        if (companyDTO.getPassword() != null) {
-            company.setPassword(companyDTO.getPassword());
-        }
         if (companyDTO.getEmail() != null) {
             company.setEmail(companyDTO.getEmail());
         }

@@ -3,7 +3,6 @@ package ci.atosdigitalacademy.cargo.services;
 import ci.atosdigitalacademy.cargo.services.dto.RoleDTO;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public interface RoleService {
 
@@ -13,7 +12,7 @@ public interface RoleService {
 
     void delete (Long id);
 
-    Optional<RoleDTO> findByRole(String roleUser);
+    List<RoleDTO> findByRole(String roleUser);
 
     List<RoleDTO> findAll();
 

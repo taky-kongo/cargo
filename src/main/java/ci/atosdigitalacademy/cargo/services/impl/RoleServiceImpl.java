@@ -48,11 +48,11 @@ public class RoleServiceImpl implements RoleService {
 
 
     @Override
-    public Optional<RoleDTO> findByRole(String roleUser) {
+    public List<RoleDTO> findByRole(String roleUser) {
         log.debug("Request to get role: {} by role",roleUser);
-        return roleRepository.findByRole(roleUser).map(role->{
+        return roleRepository.findByRole(roleUser).stream().map(role->{
             return  roleMapper.toDto(role);
-        });
+        }).toList();
     }
 
 

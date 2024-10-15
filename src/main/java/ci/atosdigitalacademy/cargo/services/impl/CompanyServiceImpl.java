@@ -1,12 +1,10 @@
 package ci.atosdigitalacademy.cargo.services.impl;
 
-import ci.atosdigitalacademy.cargo.security.AuthorityConstants;
 import ci.atosdigitalacademy.cargo.services.CompanyService;
 import ci.atosdigitalacademy.cargo.models.Company;
 import ci.atosdigitalacademy.cargo.repositories.CompanyRepository;
 import ci.atosdigitalacademy.cargo.services.RoleService;
 import ci.atosdigitalacademy.cargo.services.dto.CompanyDTO;
-import ci.atosdigitalacademy.cargo.services.dto.RoleDTO;
 import ci.atosdigitalacademy.cargo.services.mapper.CompanyMapper;
 import ci.atosdigitalacademy.cargo.services.mapping.CompanyMapping;
 import ci.atosdigitalacademy.cargo.utils.SlugifyUtils;
@@ -29,12 +27,6 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyDTO save(CompanyDTO companyDTO) {
         log.debug("Request to save Company : {}", companyDTO);
-        Optional<RoleDTO> roles = roleService.findByRole(AuthorityConstants.ROLE_COMPANY);
-        RoleDTO role = new RoleDTO();
-        if (roles.isPresent()) {
-            role = roles.get();
-        }
-        companyDTO.setRole(role);
         Company company = companyMapper.toEntity(companyDTO);
         company = companyRepository.save(company);
         return companyMapper.toDto(company);
@@ -55,7 +47,6 @@ public class CompanyServiceImpl implements CompanyService {
             company.setName(companyDTO.getName());
             company.setEmail(companyDTO.getEmail());
             company.setDateCreation(companyDTO.getDateCreation());
-            company.setPassword(companyDTO.getPassword());
             company.setPhoneNumber(companyDTO.getPhoneNumber());
             return save(company);
         }).orElseThrow(() -> new IllegalArgumentException("Company not found"));
