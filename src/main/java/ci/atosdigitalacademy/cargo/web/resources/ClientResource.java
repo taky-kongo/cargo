@@ -2,7 +2,7 @@ package ci.atosdigitalacademy.cargo.web.resources;
 
 import ci.atosdigitalacademy.cargo.services.ClientService;
 import ci.atosdigitalacademy.cargo.services.dto.ClientDTO;
-import ci.atosdigitalacademy.cargo.services.dto.RegistrationClientDTO;
+import ci.atosdigitalacademy.cargo.services.dto.RegistrationPersonDTO;
 import ci.atosdigitalacademy.cargo.services.dto.ResponseRegisterClientDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -107,8 +107,8 @@ public class ClientResource {
 
     @PostMapping("/register-client")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseRegisterClientDTO registerClient(@RequestBody RegistrationClientDTO registrationClientDTO) {
-        log.debug("REST Request to register client : {}", registrationClientDTO);
-        return clientService.registerStudent(registrationClientDTO);
+    public ResponseRegisterClientDTO registerClient(@RequestBody RegistrationPersonDTO registrationPersonDTO) {
+        log.debug("REST Request to register client : {}", registrationPersonDTO);
+        return clientService.registerClient(registrationPersonDTO);
     }
 }

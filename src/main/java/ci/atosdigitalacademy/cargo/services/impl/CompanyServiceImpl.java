@@ -1,15 +1,20 @@
 package ci.atosdigitalacademy.cargo.services.impl;
 
+import ci.atosdigitalacademy.cargo.security.AuthorityConstants;
 import ci.atosdigitalacademy.cargo.services.CompanyService;
 import ci.atosdigitalacademy.cargo.models.Company;
 import ci.atosdigitalacademy.cargo.repositories.CompanyRepository;
 import ci.atosdigitalacademy.cargo.services.RoleService;
-import ci.atosdigitalacademy.cargo.services.dto.CompanyDTO;
+import ci.atosdigitalacademy.cargo.services.UserService;
+import ci.atosdigitalacademy.cargo.services.dto.*;
 import ci.atosdigitalacademy.cargo.services.mapper.CompanyMapper;
 import ci.atosdigitalacademy.cargo.services.mapping.CompanyMapping;
 import ci.atosdigitalacademy.cargo.utils.SlugifyUtils;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +28,9 @@ public class CompanyServiceImpl implements CompanyService {
     private final CompanyMapper companyMapper;
     private final CompanyRepository companyRepository;
     private final RoleService roleService;
+    private final ModelMapper modelMapper;
+    private final UserService userService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public CompanyDTO save(CompanyDTO companyDTO) {
@@ -96,5 +104,25 @@ public class CompanyServiceImpl implements CompanyService {
             CompanyMapping.partialUpdate(company, companyDTO);
             return company;
         }).map(companyRepository::save).map(companyMapper::toDto).orElse(null);
+    }
+
+    @Override
+    @Transactional
+    public ResponseRegisterCompanyDTO registerCompany(RegistrationPersonDTO registrationPersonDTO) {
+        log.debug("Request to register company {}", registrationPersonDTO);
+        List<RoleDTO> roles = roleService.findByRole(AuthorityConstants.ROLE_COMPANY);
+        UserDTO user = modelMapper.map(registrationPersonDTO, UserDTO.class);
+        user.setPassword(bCryptPasswordEncoder.encode(registrationPersonDTO.getPassword()));
+        user.setRoles(roles);
+        user = userService.save(user);
+
+        CompanyDTO company = modelMapper.map(registrationPersonDTO, CompanyDTO.class);
+        company.setUser(user);
+        company = save(company);
+
+        ResponseRegisterCompanyDTO responseRegisterCompanyDTO = new ResponseRegisterCompanyDTO();
+        responseRegisterCompanyDTO.setCompany(company);
+        responseRegisterCompanyDTO.setUser(user);
+        return responseRegisterCompanyDTO;
     }
 }

@@ -2,6 +2,8 @@ package ci.atosdigitalacademy.cargo.web.resources;
 
 import ci.atosdigitalacademy.cargo.services.CompanyService;
 import ci.atosdigitalacademy.cargo.services.dto.CompanyDTO;
+import ci.atosdigitalacademy.cargo.services.dto.RegistrationPersonDTO;
+import ci.atosdigitalacademy.cargo.services.dto.ResponseRegisterCompanyDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -20,7 +22,7 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/api/companies")
+@RequestMapping("/api/v1/companies")
 public class CompanyResource {
     private final CompanyService companyService;
 
@@ -100,5 +102,12 @@ public class CompanyResource {
     public void deleteCompany(@PathVariable Long id) {
         log.debug("Rest request to delete company : {}", id);
         companyService.deleteCompany(id);
+    }
+
+    @PostMapping("/register-company")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseRegisterCompanyDTO registerCompanyDTO(@RequestBody RegistrationPersonDTO registrationPersonDTO) {
+        log.debug("REST Request to register company : {}", registrationPersonDTO);
+        return companyService.registerCompany(registrationPersonDTO);
     }
 }

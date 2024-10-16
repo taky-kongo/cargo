@@ -108,15 +108,15 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     @Transactional
-    public ResponseRegisterClientDTO registerStudent(RegistrationClientDTO registrationClientDTO) {
-        log.debug("Request to register client {}", registrationClientDTO);
+    public ResponseRegisterClientDTO registerClient(RegistrationPersonDTO registrationPersonDTO) {
+        log.debug("Request to register client {}", registrationPersonDTO);
         List<RoleDTO> roles = roleService.findByRole(AuthorityConstants.ROLE_USER);
-        UserDTO user = modelMapper.map(registrationClientDTO, UserDTO.class);
-        user.setPassword(bCryptPasswordEncoder.encode(registrationClientDTO.getPassword()));
+        UserDTO user = modelMapper.map(registrationPersonDTO, UserDTO.class);
+        user.setPassword(bCryptPasswordEncoder.encode(registrationPersonDTO.getPassword()));
         user.setRoles(roles);
         user = userService.save(user);
 
-        ClientDTO client = modelMapper.map(registrationClientDTO, ClientDTO.class);
+        ClientDTO client = modelMapper.map(registrationPersonDTO, ClientDTO.class);
         client.setUser(user);
         client = save(client);
 
