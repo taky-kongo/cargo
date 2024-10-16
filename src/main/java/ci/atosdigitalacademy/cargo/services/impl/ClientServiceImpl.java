@@ -112,13 +112,13 @@ public class ClientServiceImpl implements ClientService {
         log.debug("Request to register client {}", registrationPersonDTO);
         List<RoleDTO> roles = roleService.findByRole(AuthorityConstants.ROLE_USER);
         UserDTO user = modelMapper.map(registrationPersonDTO, UserDTO.class);
-        user.setPassword(bCryptPasswordEncoder.encode(registrationPersonDTO.getPassword()));
+        user.setPassword(registrationPersonDTO.getPassword());
         user.setRoles(roles);
-        user = userService.save(user);
+        user = userService.saveUser(user);
 
         ClientDTO client = modelMapper.map(registrationPersonDTO, ClientDTO.class);
         client.setUser(user);
-        client = save(client);
+        client = saveClient(client);
 
         ResponseRegisterClientDTO responseRegisterClientDTO = new ResponseRegisterClientDTO();
         responseRegisterClientDTO.setClient(client);

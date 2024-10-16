@@ -19,5 +19,7 @@ public class UserDTO {
 
     private String password;
 
+    private String slug;
+
     private List<RoleDTO> roles;
 }

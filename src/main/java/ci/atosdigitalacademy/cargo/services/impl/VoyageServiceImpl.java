@@ -96,6 +96,22 @@ public class VoyageServiceImpl implements VoyageService {
         }).toList();
     }
 
+    @Override
+    public List<VoyageDTO> findVoyageByCompanyId(Long companyId) {
+        log.debug("Request to get all voyages by company {}: ", companyId);
+        return voyageRepository.findVoyageByCompanyId(companyId).stream().map(voyage -> {
+            return voyageMapper.toDto(voyage);
+        }).toList();
+    }
+
+    @Override
+    public List<VoyageDTO> findVoyageByCompanyNameIgnoreCase(String companyName) {
+        log.debug("Request to get all voyages by company name {}: ", companyName);
+        return voyageRepository.findVoyageByCompanyNameIgnoreCase(companyName).stream().map(company -> {
+            return voyageMapper.toDto(company);
+        }).toList();
+    }
+
     @GetMapping
     public List<VoyageDTO> getAll(){
         log.debug("Request to get All voyages");

@@ -5,6 +5,7 @@ import ci.atosdigitalacademy.cargo.repositories.UserRepository;
 import ci.atosdigitalacademy.cargo.services.UserService;
 import ci.atosdigitalacademy.cargo.services.dto.UserDTO;
 import ci.atosdigitalacademy.cargo.services.mapper.UserMapper;
+import ci.atosdigitalacademy.cargo.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -32,10 +33,17 @@ public class UserServiceImpl implements UserService {
         log.debug("Request to save user {}", userDTO);
         String password = userDTO.getPassword();
         userDTO.setPassword(bCryptPasswordEncoder.encode(password));
-        userDTO.setRoles(userDTO.getRoles());
         User user = userMapper.toEntity(userDTO);
         user = userRepository.save(user);
         return userMapper.toDto(user);
+    }
+
+    @Override
+    public UserDTO saveUser(UserDTO userDTO) {
+        log.debug("Request to save User {} with slug", userDTO);
+        final String slug = SlugifyUtils.generate(String.valueOf(userDTO.getUsername()));
+        userDTO.setSlug(slug);
+        return save(userDTO);
     }
 
     @Override
