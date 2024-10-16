@@ -29,4 +29,6 @@ public interface VoyageService {
     List<VoyageDTO> findVoyageByCompanyId(Long companyId);
 
     List<VoyageDTO> findVoyageByCompanyNameIgnoreCase(String companyName);
+
+    List<VoyageDTO> findVoyageByAmount(Double amount);
 }

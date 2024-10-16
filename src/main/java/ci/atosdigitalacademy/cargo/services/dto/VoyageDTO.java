@@ -24,6 +24,8 @@ public class VoyageDTO {
 
     private String time;
 
+    private Double amount;
+
     private String slug;
 
     private List<ReservationDTO> reservations;

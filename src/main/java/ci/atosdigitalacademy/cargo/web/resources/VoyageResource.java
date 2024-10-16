@@ -134,4 +134,17 @@ public class VoyageResource {
             return new ResponseEntity<>("Company not found", HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/amount/{amount}")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Request to get list of voyages by amount"),
+            @ApiResponse(responseCode = "404", description = "amount not found", content = @Content(schema = @Schema(implementation = String.class)))
+    })
+    public ResponseEntity<?> getVoyageByAmount(
+            @Parameter(required = true, description = "Slug of voyage to be retrieved")
+            @PathVariable Double amount) {
+        log.debug("REST request to get list of voyages by amount {}", amount);
+        List<VoyageDTO> voyageDTO = voyageService.findVoyageByAmount(amount);
+        return new ResponseEntity<>(voyageDTO, HttpStatus.OK);
+    }
 }
