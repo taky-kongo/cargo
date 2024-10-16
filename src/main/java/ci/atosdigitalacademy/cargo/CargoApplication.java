@@ -66,7 +66,7 @@ public class CargoApplication implements CommandLineRunner {
 		// Ajout des clients
 		ClientDTO clientDTO1 = new ClientDTO();
 		clientDTO1.setName("user1");
-		clientDTO1.setPhoneNumber("0234028990");
+		clientDTO1.setPhoneNumber("023028990");
 		clientDTO1.setEmail("user1@gmail.com");
 		clientDTO1.setDateCreation(LocalDate.now());
 		clientDTO1.setUser(user1);
