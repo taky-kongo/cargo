@@ -19,6 +19,8 @@ public class ReservationDTO {
 
     private String status;
 
+    private int seatNumber;
+
     private String slug;
 
     private ClientDTO client;

@@ -25,7 +25,6 @@ public class DomainUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         final Optional<User> user = userRepository.findByUsername(username);
 
         if (user.isEmpty()) {
@@ -43,6 +42,7 @@ public class DomainUserDetailService implements UserDetailsService {
                 .username(userRecover.getUsername())
                 .password(userRecover.getPassword())
                 .authorities(grantedAuthorities)
+                //      .roles()
                 .build()).orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 }

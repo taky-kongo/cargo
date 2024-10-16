@@ -26,6 +26,9 @@ public class Reservation implements Serializable {
 
     private String status;
 
+    @Column(name = "seat_number")
+    private int seatNumber;
+
     private String slug;
 
     @ManyToOne

@@ -17,7 +17,7 @@ public class SeatDTO {
 
     private String classe;
 
-    private String status;
+    private boolean available;
 
     private String slug;
 

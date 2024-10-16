@@ -2,6 +2,7 @@ package ci.atosdigitalacademy.cargo.models;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public abstract class Person implements Serializable {
 
     private String name;
 
+    @Email(message = "L'email doit être au format valide")
     private String email;
 
     @Column(name = "phone_number", nullable = false, unique = true)

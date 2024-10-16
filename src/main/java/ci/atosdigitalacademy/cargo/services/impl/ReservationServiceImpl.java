@@ -24,6 +24,7 @@ public class ReservationServiceImpl implements ReservationService {
     private final UserService userService;
     private final VoyageService voyageService;
     private final PaymentService paymentService;
+    private final SeatService seatService;
 
     @Override
     public ReservationDTO save(ReservationDTO reservationDTO) {
@@ -79,10 +80,26 @@ public class ReservationServiceImpl implements ReservationService {
             client = clientDTO.get();
         }
         reservationDTO.setClient(client);
+
         Optional<VoyageDTO> voyageDTO = voyageService.findOne(reservationDTO.getVoyage().getId());
-        voyageDTO.ifPresent(reservationDTO::setVoyage);
+        if (voyageDTO.isEmpty()) {
+            throw new IllegalArgumentException("Voyage id not found");
+        }
+        VoyageDTO voyage = voyageDTO.get();
+        reservationDTO.setVoyage(voyage);
+
+        int seatNumber = reservationDTO.getSeatNumber();
+        SeatDTO seat = voyage.getSeats().stream()
+                .filter(s -> s.getSeatNumber() == seatNumber)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Le siège " + seatNumber + " n'est pas disponible."));
+
+        seat.setAvailable(false);
+        seatService.save(seat);
+
         Optional<PaymentDTO> paymentDTO = paymentService.findOne(reservationDTO.getPayment().getId());
         paymentDTO.ifPresent(reservationDTO::setPayment);
+
         final String slug = SlugifyUtils.generate(reservationDTO.getDateReservation().toString());
         reservationDTO.setSlug(slug);
         return save(reservationDTO);
