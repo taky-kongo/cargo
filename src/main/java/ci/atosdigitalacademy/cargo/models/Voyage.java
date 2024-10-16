@@ -31,6 +31,8 @@ public class Voyage implements Serializable {
 
     private String time;
 
+    private Double amount;
+
     private String slug;
 
     @OneToMany

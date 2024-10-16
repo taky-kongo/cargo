@@ -39,6 +39,7 @@ public class VoyageServiceImpl implements VoyageService {
             existingVoyage.setTime(voyageDTO.getTime());
             existingVoyage.setStart(voyageDTO.getStart());
             existingVoyage.setDestination(voyageDTO.getDestination());
+            existingVoyage.setAmount(voyageDTO.getAmount());
             return save(existingVoyage);
         }).orElseThrow(() -> new IllegalArgumentException("Voyage not found"));
     }
@@ -109,6 +110,13 @@ public class VoyageServiceImpl implements VoyageService {
         log.debug("Request to get all voyages by company name {}: ", companyName);
         return voyageRepository.findVoyageByCompanyNameIgnoreCase(companyName).stream().map(company -> {
             return voyageMapper.toDto(company);
+        }).toList();
+    }
+
+    @Override
+    public List<VoyageDTO> findVoyageByAmount(Double amount) {
+        return voyageRepository.findVoyageByAmountLessThanEqual(amount).stream().map(voyage -> {
+            return voyageMapper.toDto(voyage);
         }).toList();
     }
 

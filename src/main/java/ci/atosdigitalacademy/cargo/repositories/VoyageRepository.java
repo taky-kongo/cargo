@@ -13,4 +13,5 @@ public interface VoyageRepository extends JpaRepository<Voyage, Long> {
     List<Voyage> findByStartIgnoreCaseAndDestinationIgnoreCaseAndDateVoyageGreaterThanEqual(String start, String destination, LocalDate date);
     List<Voyage> findVoyageByCompanyId(Long companyId);
     List<Voyage> findVoyageByCompanyNameIgnoreCase(String companyName);
+    List<Voyage> findVoyageByAmountLessThanEqual(double amount);
 }
