@@ -1,5 +1,6 @@
 package ci.atosdigitalacademy.cargo.models;
 
+import ci.atosdigitalacademy.cargo.models.enumeration.ReservationType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +25,8 @@ public class Reservation implements Serializable {
     @Column(name = "date_reservation")
     private LocalDate dateReservation;
 
-    private String status;
+    @Enumerated(value = EnumType.STRING)
+    private ReservationType status;
 
     private String slug;
 

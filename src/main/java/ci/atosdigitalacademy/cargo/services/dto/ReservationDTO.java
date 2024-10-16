@@ -1,5 +1,6 @@
 package ci.atosdigitalacademy.cargo.services.dto;
 
+import ci.atosdigitalacademy.cargo.models.enumeration.ReservationType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ public class ReservationDTO {
 
     private LocalDate dateReservation;
 
-    private String status;
+    private ReservationType status;
 
     private String slug;
 
@@ -26,4 +27,5 @@ public class ReservationDTO {
     private VoyageDTO voyage;
 
     private PaymentDTO payment;
+
 }

@@ -23,4 +23,6 @@ public interface ReservationService {
 
     ReservationDTO updateTotal(ReservationDTO reservationDTO, Long id);
 
+    void cancelledReservation(Long reservationID);
+
 }

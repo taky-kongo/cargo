@@ -1,6 +1,7 @@
 package ci.atosdigitalacademy.cargo.services.impl;
 
 import ci.atosdigitalacademy.cargo.models.Reservation;
+import ci.atosdigitalacademy.cargo.models.enumeration.ReservationType;
 import ci.atosdigitalacademy.cargo.repositories.ReservationRepository;
 import ci.atosdigitalacademy.cargo.services.*;
 import ci.atosdigitalacademy.cargo.services.dto.*;
@@ -9,7 +10,9 @@ import ci.atosdigitalacademy.cargo.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import java.time.temporal.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +27,7 @@ public class ReservationServiceImpl implements ReservationService {
     private final UserService userService;
     private final VoyageService voyageService;
     private final PaymentService paymentService;
-
+    private static long DELAY_EXPIRATION_CANCELLED_RESERVATION= 30;
     @Override
     public ReservationDTO save(ReservationDTO reservationDTO) {
         log.debug("Request to save Reservation : {}",reservationDTO);
@@ -101,4 +104,18 @@ public class ReservationServiceImpl implements ReservationService {
         return update(reservationDTO);
     }
 
+    @Override
+    public void cancelledReservation(Long reservationID) {
+        log.debug("Request to cancel Reservation for ReservationId {}", reservationID);
+        ReservationDTO reservation = findOne(reservationID).orElseThrow(()-> new IllegalArgumentException(" reservation not found"));
+        ClientDTO client = reservation.getClient();
+
+        if (reservation.getVoyage().getDateVoyage().isAfter(LocalDate.now().plus(DELAY_EXPIRATION_CANCELLED_RESERVATION, ChronoUnit.HOURS))){
+            throw new IllegalArgumentException("le delais de l'annulation est expiré");
+        }
+
+        reservation.setStatus(ReservationType.CANCELLED);
+        save(reservation);
+
+    }
 }
