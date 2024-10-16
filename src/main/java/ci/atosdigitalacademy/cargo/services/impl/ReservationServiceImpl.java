@@ -24,7 +24,6 @@ public class ReservationServiceImpl implements ReservationService {
     private final UserService userService;
     private final VoyageService voyageService;
     private final PaymentService paymentService;
-    private final SeatService seatService;
 
     @Override
     public ReservationDTO save(ReservationDTO reservationDTO) {
@@ -89,13 +88,12 @@ public class ReservationServiceImpl implements ReservationService {
         reservationDTO.setVoyage(voyage);
 
         int seatNumber = reservationDTO.getSeatNumber();
-        SeatDTO seat = voyage.getSeats().stream()
-                .filter(s -> s.getSeatNumber() == seatNumber)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Le siège " + seatNumber + " n'est pas disponible."));
+        boolean seatAvailable = voyage.getSeats().stream()
+                .noneMatch(seat -> seat.getSeatNumber() == seatNumber && !seat.isAvailable());
 
-        seat.setAvailable(false);
-        seatService.save(seat);
+        if (!seatAvailable) {
+            throw new IllegalArgumentException("Le siège " + reservationDTO.getSeatNumber() + " n'existe pas");
+        }
 
         Optional<PaymentDTO> paymentDTO = paymentService.findOne(reservationDTO.getPayment().getId());
         paymentDTO.ifPresent(reservationDTO::setPayment);
