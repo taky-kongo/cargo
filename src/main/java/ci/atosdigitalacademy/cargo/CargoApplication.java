@@ -49,29 +49,29 @@ public class CargoApplication implements CommandLineRunner {
 		user1.setUsername("user1");
 		user1.setPassword("password1");
 
-		userService.saveUser(user1);
+		user1 = userService.saveUser(user1);
 
 		UserDTO user2 = new UserDTO();
 		user2.setUsername("user2");
 		user2.setPassword("password2");
 
-		userService.saveUser(user2);
+		user2 = userService.saveUser(user2);
 
 		UserDTO user3 = new UserDTO();
 		user3.setUsername("user3");
 		user3.setPassword("password3");
 
-		userService.saveUser(user3);
+		user3 = userService.saveUser(user3);
 
 		// Ajout des clients
 		ClientDTO clientDTO1 = new ClientDTO();
 		clientDTO1.setName("user1");
-		clientDTO1.setPhoneNumber("0234028990");
+		clientDTO1.setPhoneNumber("023028990");
 		clientDTO1.setEmail("user1@gmail.com");
 		clientDTO1.setDateCreation(LocalDate.now());
 		clientDTO1.setUser(user1);
 
-		clientService.saveClient(clientDTO1);
+		clientDTO1 = clientService.save(clientDTO1);
 
 		ClientDTO clientDTO2 = new ClientDTO();
 		clientDTO2.setName("user2");
@@ -80,7 +80,7 @@ public class CargoApplication implements CommandLineRunner {
 		clientDTO2.setDateCreation(LocalDate.now());
 		clientDTO2.setUser(user2);
 
-		clientService.saveClient(clientDTO2);
+		clientDTO2 = clientService.saveClient(clientDTO2);
 
 		ClientDTO clientDTO3 = new ClientDTO();
 		clientDTO3.setName("user3");
@@ -89,26 +89,26 @@ public class CargoApplication implements CommandLineRunner {
 		clientDTO3.setDateCreation(LocalDate.now());
 		clientDTO3.setUser(user3);
 
-		clientService.saveClient(clientDTO3);
+		clientDTO3 = clientService.saveClient(clientDTO3);
 
 		// Ajout des users pour les compagnies
 		UserDTO userVoyage1 = new UserDTO();
 		userVoyage1.setUsername("userVoyage1");
 		userVoyage1.setPassword("passwordVoyage1");
 
-		userService.saveUser(userVoyage1);
+		userVoyage1 = userService.saveUser(userVoyage1);
 
 		UserDTO userVoyage2 = new UserDTO();
 		userVoyage2.setUsername("userVoyage2");
 		userVoyage2.setPassword("passwordVoyage2");
 
-		userService.saveUser(userVoyage2);
+		userVoyage2 = userService.saveUser(userVoyage2);
 
 		UserDTO userVoyage3 = new UserDTO();
 		userVoyage3.setUsername("userVoyage3");
 		userVoyage3.setPassword("passwordVoyage3");
 
-		userService.saveUser(userVoyage3);
+		userVoyage3 = userService.saveUser(userVoyage3);
 
 		CompanyDTO company1 = new CompanyDTO();
 		company1.setName("company1");
@@ -117,7 +117,7 @@ public class CargoApplication implements CommandLineRunner {
 		company1.setDateCreation(LocalDate.now());
 		company1.setUser(userVoyage1);
 
-		companyService.saveCompany(company1);
+		company1 = companyService.saveCompany(company1);
 
 		CompanyDTO company2 = new CompanyDTO();
 		company2.setName("company2");
@@ -126,7 +126,7 @@ public class CargoApplication implements CommandLineRunner {
 		company2.setDateCreation(LocalDate.now());
 		company2.setUser(userVoyage2);
 
-		companyService.saveCompany(company2);
+		company2 = companyService.saveCompany(company2);
 
 		CompanyDTO company3 = new CompanyDTO();
 		company3.setName("company3");
@@ -135,7 +135,7 @@ public class CargoApplication implements CommandLineRunner {
 		company3.setDateCreation(LocalDate.now());
 		company3.setUser(userVoyage3);
 
-		companyService.saveCompany(company3);
+		company3 = companyService.saveCompany(company3);
 
 		// Ajout des voyages
 		VoyageDTO voyage1 = new VoyageDTO();
@@ -146,7 +146,7 @@ public class CargoApplication implements CommandLineRunner {
 		voyage1.setDateVoyage(LocalDate.parse("2024-10-18"));
 		voyage1.setTime("4");
 
-		voyageService.saveVoyage(voyage1);
+		voyage1 = voyageService.saveVoyage(voyage1);
 
 		VoyageDTO voyage2 = new VoyageDTO();
 		voyage2.setStart("Abidjan");
@@ -156,16 +156,17 @@ public class CargoApplication implements CommandLineRunner {
 		voyage2.setDateVoyage(LocalDate.parse("2024-10-19"));
 		voyage2.setTime("3.5");
 
-		voyageService.saveVoyage(voyage2);
+		voyage2 = voyageService.saveVoyage(voyage2);
 
 		VoyageDTO voyage3 = new VoyageDTO();
 		voyage3.setStart("Abidjan");
 		voyage3.setDestination("Bouaké");
+		voyage3.setCompany(company1);
 		voyage3.setAmount(6500D);
 		voyage3.setDateVoyage(LocalDate.parse("2024-10-17"));
 		voyage3.setTime("6");
 
-		voyageService.saveVoyage(voyage3);
+		voyage3 = voyageService.saveVoyage(voyage3);
 
 		VoyageDTO voyage4 = new VoyageDTO();
 		voyage4.setStart("Abidjan");
@@ -175,7 +176,7 @@ public class CargoApplication implements CommandLineRunner {
 		voyage4.setDateVoyage(LocalDate.parse("2024-10-18"));
 		voyage4.setTime("4.5");
 
-		voyageService.saveVoyage(voyage4);
+		voyage4 = voyageService.saveVoyage(voyage4);
 
 		VoyageDTO voyage5 = new VoyageDTO();
 		voyage5.setStart("Yamoussoukro");
@@ -185,7 +186,7 @@ public class CargoApplication implements CommandLineRunner {
 		voyage5.setDateVoyage(LocalDate.parse("2024-10-19"));
 		voyage5.setTime("4");
 
-		voyageService.saveVoyage(voyage5);
+		voyage5 = voyageService.saveVoyage(voyage5);
 
 		VoyageDTO voyage6 = new VoyageDTO();
 		voyage6.setStart("Bouaké");
@@ -195,7 +196,7 @@ public class CargoApplication implements CommandLineRunner {
 		voyage6.setDateVoyage(LocalDate.parse("2024-10-17"));
 		voyage6.setTime("2");
 
-		voyageService.saveVoyage(voyage6);
+		voyage6 = voyageService.saveVoyage(voyage6);
 
 		VoyageDTO voyage7 = new VoyageDTO();
 		voyage7.setStart("Abidjan");
@@ -205,7 +206,7 @@ public class CargoApplication implements CommandLineRunner {
 		voyage7.setDateVoyage(LocalDate.parse("2024-10-18"));
 		voyage7.setTime("5");
 
-		voyageService.saveVoyage(voyage7);
+		voyage7 = voyageService.saveVoyage(voyage7);
 
 		VoyageDTO voyage8 = new VoyageDTO();
 		voyage8.setStart("Abidjan");
@@ -215,7 +216,7 @@ public class CargoApplication implements CommandLineRunner {
 		voyage8.setDateVoyage(LocalDate.parse("2024-10-19"));
 		voyage8.setTime("5");
 
-		voyageService.saveVoyage(voyage8);
+		voyage8 = voyageService.saveVoyage(voyage8);
 
 		VoyageDTO voyage9 = new VoyageDTO();
 		voyage9.setStart("Abidjan");
@@ -225,7 +226,7 @@ public class CargoApplication implements CommandLineRunner {
 		voyage9.setDateVoyage(LocalDate.parse("2024-10-17"));
 		voyage9.setTime("1.5");
 
-		voyageService.saveVoyage(voyage9);
+		voyage9 = voyageService.saveVoyage(voyage9);
 
 		SeatDTO seat1 = new SeatDTO();
 		seat1.setSeatNumber(1);
@@ -233,7 +234,7 @@ public class CargoApplication implements CommandLineRunner {
 		seat1.setStatus("Actif");
 		seat1.setVoyage(voyage1);
 
-		seatService.saveSeat(seat1);
+		seat1 = seatService.saveSeat(seat1);
 
 		SeatDTO seat2 = new SeatDTO();
 		seat2.setSeatNumber(2);
@@ -241,7 +242,7 @@ public class CargoApplication implements CommandLineRunner {
 		seat2.setStatus("Actif");
 		seat2.setVoyage(voyage1);
 
-		seatService.saveSeat(seat2);
+		seat2 = seatService.saveSeat(seat2);
 
 		SeatDTO seat3 = new SeatDTO();
 		seat3.setSeatNumber(3);
@@ -249,7 +250,7 @@ public class CargoApplication implements CommandLineRunner {
 		seat3.setStatus("Actif");
 		seat3.setVoyage(voyage1);
 
-		seatService.saveSeat(seat3);
+		seat3 = seatService.saveSeat(seat3);
 
 		SeatDTO seat4 = new SeatDTO();
 		seat4.setSeatNumber(1);
@@ -257,7 +258,7 @@ public class CargoApplication implements CommandLineRunner {
 		seat4.setStatus("Actif");
 		seat4.setVoyage(voyage2);
 
-		seatService.saveSeat(seat4);
+		seat4 = seatService.saveSeat(seat4);
 
 		SeatDTO seat5 = new SeatDTO();
 		seat5.setSeatNumber(2);
@@ -265,7 +266,7 @@ public class CargoApplication implements CommandLineRunner {
 		seat5.setStatus("Actif");
 		seat5.setVoyage(voyage2);
 
-		seatService.saveSeat(seat5);
+		seat5 = seatService.saveSeat(seat5);
 
 		SeatDTO seat6 = new SeatDTO();
 		seat6.setSeatNumber(3);
@@ -273,7 +274,7 @@ public class CargoApplication implements CommandLineRunner {
 		seat6.setStatus("Actif");
 		seat6.setVoyage(voyage2);
 
-		seatService.saveSeat(seat6);
+		seat6 = seatService.saveSeat(seat6);
 
 		SeatDTO seat7 = new SeatDTO();
 		seat7.setSeatNumber(1);
@@ -281,7 +282,7 @@ public class CargoApplication implements CommandLineRunner {
 		seat7.setStatus("Actif");
 		seat7.setVoyage(voyage3);
 
-		seatService.saveSeat(seat7);
+		seat7 = seatService.saveSeat(seat7);
 
 		SeatDTO seat8 = new SeatDTO();
 		seat8.setSeatNumber(2);
@@ -289,7 +290,7 @@ public class CargoApplication implements CommandLineRunner {
 		seat8.setStatus("Actif");
 		seat8.setVoyage(voyage3);
 
-		seatService.saveSeat(seat8);
+		seat8 = seatService.saveSeat(seat8);
 
 		SeatDTO seat9 = new SeatDTO();
 		seat9.setSeatNumber(3);
@@ -297,6 +298,6 @@ public class CargoApplication implements CommandLineRunner {
 		seat9.setStatus("Actif");
 		seat9.setVoyage(voyage3);
 
-		seatService.saveSeat(seat9);
+		seat9 = seatService.saveSeat(seat9);
 	}
 }

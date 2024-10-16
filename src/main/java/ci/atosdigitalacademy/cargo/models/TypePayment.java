@@ -25,6 +25,6 @@ public class TypePayment implements Serializable {
 
     private String slug;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Payment> payments;
 }
