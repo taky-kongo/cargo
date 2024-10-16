@@ -11,4 +11,6 @@ public interface VoyageRepository extends JpaRepository<Voyage, Long> {
 
     Optional<Voyage> findBySlug(String slug);
     List<Voyage> findByStartIgnoreCaseAndDestinationIgnoreCaseAndDateVoyageGreaterThanEqual(String start, String destination, LocalDate date);
+    List<Voyage> findVoyageByCompanyId(Long companyId);
+    List<Voyage> findVoyageByCompanyNameIgnoreCase(String companyName);
 }

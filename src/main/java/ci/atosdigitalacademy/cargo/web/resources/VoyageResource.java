@@ -1,6 +1,8 @@
 package ci.atosdigitalacademy.cargo.web.resources;
 
+import ci.atosdigitalacademy.cargo.services.CompanyService;
 import ci.atosdigitalacademy.cargo.services.VoyageService;
+import ci.atosdigitalacademy.cargo.services.dto.CompanyDTO;
 import ci.atosdigitalacademy.cargo.services.dto.VoyageDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -25,6 +27,7 @@ import java.util.Optional;
 public class VoyageResource {
 
     private final VoyageService voyageService;
+    private final CompanyService companyService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -103,5 +106,32 @@ public class VoyageResource {
     public List<VoyageDTO> getVoyagesBySearch(@PathVariable String start, @PathVariable String destination, @PathVariable LocalDate date) {
         log.debug("REST request to get voyages by search");
         return voyageService.findByStartAndDestinationOrDateVoyage(start, destination, date);
+    }
+
+    @GetMapping("/companies/{id}")
+    @ApiResponse(responseCode = "200", description = "Request to get voyages by companyId")
+    @Operation(summary = "Get voyages", description = "This endpoint allow to voyages")
+    public ResponseEntity<?> findVoyageByCompanyId(@PathVariable Long id) {
+        log.debug("REST request to get voyages by company id {}", id);
+        Optional<CompanyDTO> companyDTO = companyService.findOne(id);
+        if(companyDTO.isPresent()){
+            return new ResponseEntity<>(voyageService.findVoyageByCompanyId(id), HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>("Company not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/companies/name/{companyName}")
+    @ApiResponse(responseCode = "200", description = "Request to get voyages by companyName")
+    @Operation(summary = "Get voyages", description = "This endpoint allow to voyages")
+    public ResponseEntity<?> findVoyageByCompanyNameIgnoreCase(@PathVariable String companyName) {
+        log.debug("Request to get all voyages by company name {}: ", companyName);
+        Optional<CompanyDTO> companyDTO = companyService.findCompaniesByName(companyName);
+        if (companyDTO.isPresent()) {
+            return new ResponseEntity<>(voyageService.findVoyageByCompanyNameIgnoreCase(companyName), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Company not found", HttpStatus.NOT_FOUND);
+        }
     }
 }

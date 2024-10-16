@@ -26,4 +26,7 @@ public interface VoyageService {
 
     List<VoyageDTO> findByStartAndDestinationOrDateVoyage(String start, String destination, LocalDate date);
 
+    List<VoyageDTO> findVoyageByCompanyId(Long companyId);
+
+    List<VoyageDTO> findVoyageByCompanyNameIgnoreCase(String companyName);
 }

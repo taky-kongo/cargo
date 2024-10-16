@@ -9,6 +9,8 @@ public interface UserService {
 
     UserDTO save(UserDTO userDTO);
 
+    UserDTO saveUser(UserDTO userDTO);
+
     UserDTO update(UserDTO userDTO);
 
     Optional<UserDTO> findOne(Long id);
