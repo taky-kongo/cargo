@@ -93,7 +93,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Optional<CompanyDTO> findCompaniesByName(String name) {
-        log.debug("Request to get Company by name: {}", name;
+        log.debug("Request to get Company by name: {}", name);
         return companyRepository.findCompaniesByName(name).map(company -> {
             return companyMapper.toDto(company);
         });

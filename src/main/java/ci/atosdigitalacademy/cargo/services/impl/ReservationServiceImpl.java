@@ -2,12 +2,8 @@ package ci.atosdigitalacademy.cargo.services.impl;
 
 import ci.atosdigitalacademy.cargo.models.Reservation;
 import ci.atosdigitalacademy.cargo.repositories.ReservationRepository;
-import ci.atosdigitalacademy.cargo.services.ClientService;
-import ci.atosdigitalacademy.cargo.services.ReservationService;
-import ci.atosdigitalacademy.cargo.services.UserService;
-import ci.atosdigitalacademy.cargo.services.dto.ClientDTO;
-import ci.atosdigitalacademy.cargo.services.dto.ReservationDTO;
-import ci.atosdigitalacademy.cargo.services.dto.UserDTO;
+import ci.atosdigitalacademy.cargo.services.*;
+import ci.atosdigitalacademy.cargo.services.dto.*;
 import ci.atosdigitalacademy.cargo.services.mapper.ReservationMapper;
 import ci.atosdigitalacademy.cargo.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +22,8 @@ public class ReservationServiceImpl implements ReservationService {
     private  final ReservationMapper reservationMapper;
     private final ClientService clientService;
     private final UserService userService;
+    private final VoyageService voyageService;
+    private final PaymentService paymentService;
 
     @Override
     public ReservationDTO save(ReservationDTO reservationDTO) {
@@ -81,6 +79,10 @@ public class ReservationServiceImpl implements ReservationService {
             client = clientDTO.get();
         }
         reservationDTO.setClient(client);
+        Optional<VoyageDTO> voyageDTO = voyageService.findOne(reservationDTO.getVoyage().getId());
+        voyageDTO.ifPresent(reservationDTO::setVoyage);
+        Optional<PaymentDTO> paymentDTO = paymentService.findOne(reservationDTO.getPayment().getId());
+        paymentDTO.ifPresent(reservationDTO::setPayment);
         final String slug = SlugifyUtils.generate(reservationDTO.getDateReservation().toString());
         reservationDTO.setSlug(slug);
         return save(reservationDTO);
