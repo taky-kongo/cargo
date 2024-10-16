@@ -2,6 +2,8 @@ package ci.atosdigitalacademy.cargo.web.resources;
 
 import ci.atosdigitalacademy.cargo.services.ClientService;
 import ci.atosdigitalacademy.cargo.services.dto.ClientDTO;
+import ci.atosdigitalacademy.cargo.services.dto.RegistrationPersonDTO;
+import ci.atosdigitalacademy.cargo.services.dto.ResponseRegisterClientDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -101,5 +103,12 @@ public class ClientResource {
     public void delete(@PathVariable Long id) {
         log.debug("Rest request to delete client : {}", id);
         clientService.delete(id);
+    }
+
+    @PostMapping("/register-client")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseRegisterClientDTO registerClient(@RequestBody RegistrationPersonDTO registrationPersonDTO) {
+        log.debug("REST Request to register client : {}", registrationPersonDTO);
+        return clientService.registerClient(registrationPersonDTO);
     }
 }

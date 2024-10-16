@@ -1,6 +1,9 @@
 package ci.atosdigitalacademy.cargo.services;
 
 import ci.atosdigitalacademy.cargo.services.dto.CompanyDTO;
+import ci.atosdigitalacademy.cargo.services.dto.RegistrationPersonDTO;
+import ci.atosdigitalacademy.cargo.services.dto.ResponseRegisterClientDTO;
+import ci.atosdigitalacademy.cargo.services.dto.ResponseRegisterCompanyDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,4 +27,6 @@ public interface CompanyService {
     void deleteCompany(Long id);
 
     CompanyDTO partialUpdate(CompanyDTO company, Long id);
+
+    ResponseRegisterCompanyDTO registerCompany(RegistrationPersonDTO registrationPersonDTO);
 }

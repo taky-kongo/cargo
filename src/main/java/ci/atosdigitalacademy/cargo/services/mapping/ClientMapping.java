@@ -9,9 +9,6 @@ public final class ClientMapping {
 
     public static void partialUpdate(Client client, ClientDTO clientDTO) {
 
-        if (clientDTO.getPassword() != null) {
-            client.setPassword(clientDTO.getPassword());
-        }
         if (clientDTO.getEmail() != null) {
             client.setEmail(clientDTO.getEmail());
         }

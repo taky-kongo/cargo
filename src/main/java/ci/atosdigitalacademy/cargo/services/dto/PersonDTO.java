@@ -5,19 +5,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class PersonDTO {
 
     private Long id;
 
-    private String username;
+    private String name;
 
-    private String password;
+    private String email;
 
-    private List<RoleDTO> roles;
+    private String phoneNumber;
+
+    private LocalDate dateCreation;
+
+    private String slug;
+
+    private UserDTO user;
 }

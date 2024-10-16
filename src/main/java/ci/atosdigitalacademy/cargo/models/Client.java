@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "clients")
-public class Client extends User{
+public class Client extends Person {
 
     @OneToMany
     private List<Reservation> reservations;

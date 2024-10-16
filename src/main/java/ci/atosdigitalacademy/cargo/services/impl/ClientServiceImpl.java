@@ -5,18 +5,20 @@ import ci.atosdigitalacademy.cargo.repositories.ClientRepository;
 import ci.atosdigitalacademy.cargo.security.AuthorityConstants;
 import ci.atosdigitalacademy.cargo.services.ClientService;
 import ci.atosdigitalacademy.cargo.services.RoleService;
-import ci.atosdigitalacademy.cargo.services.dto.ClientDTO;
-import ci.atosdigitalacademy.cargo.services.dto.RoleDTO;
+import ci.atosdigitalacademy.cargo.services.UserService;
+import ci.atosdigitalacademy.cargo.services.dto.*;
 import ci.atosdigitalacademy.cargo.services.mapper.ClientMapper;
 import ci.atosdigitalacademy.cargo.services.mapping.ClientMapping;
 import ci.atosdigitalacademy.cargo.utils.SlugifyUtils;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -25,17 +27,14 @@ public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
+    private final ModelMapper modelMapper;
     private final RoleService roleService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserService userService;
 
     @Override
     public ClientDTO save(ClientDTO clientDTO) {
         log.debug("Request to save client {}", clientDTO);
-        Optional<RoleDTO> roles = roleService.findByRole(AuthorityConstants.ROLE_USER);
-        RoleDTO role = new RoleDTO();
-        if (roles.isPresent()) {
-            role = roles.get();
-        }
-        clientDTO.setRole(role);
         Client client = clientMapper.toEntity(clientDTO);
         client = clientRepository.save(client);
         return clientMapper.toDto(client);
@@ -105,5 +104,32 @@ public class ClientServiceImpl implements ClientService {
     public void delete(Long id) {
         log.debug("Request to delete client {}", id);
         clientRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public ResponseRegisterClientDTO registerClient(RegistrationPersonDTO registrationPersonDTO) {
+        log.debug("Request to register client {}", registrationPersonDTO);
+        List<RoleDTO> roles = roleService.findByRole(AuthorityConstants.ROLE_USER);
+        UserDTO user = modelMapper.map(registrationPersonDTO, UserDTO.class);
+        user.setPassword(bCryptPasswordEncoder.encode(registrationPersonDTO.getPassword()));
+        user.setRoles(roles);
+        user = userService.save(user);
+
+        ClientDTO client = modelMapper.map(registrationPersonDTO, ClientDTO.class);
+        client.setUser(user);
+        client = save(client);
+
+        ResponseRegisterClientDTO responseRegisterClientDTO = new ResponseRegisterClientDTO();
+        responseRegisterClientDTO.setClient(client);
+        responseRegisterClientDTO.setUser(user);
+        return responseRegisterClientDTO;
+    }
+
+    @Override
+    public Optional<ClientDTO> findClientByUserId(Long userId) {
+        return clientRepository.findClientByUserId(userId).map(client -> {
+            return clientMapper.toDto(client);
+        });
     }
 }

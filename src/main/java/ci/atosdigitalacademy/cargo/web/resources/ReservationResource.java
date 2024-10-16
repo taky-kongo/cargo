@@ -18,14 +18,14 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/reservations")
+@RequestMapping("/api/v1/reservations")
 @Slf4j
 @RequiredArgsConstructor
 public class ReservationResource {
 
     private final ReservationService reservationService;
 
-    @PostMapping
+    @PostMapping("/me")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiResponse(responseCode = "201", description = "Request to save reservation")
     @Operation(summary = "Save a new reservation", description = "This endpoint allow to save reservation")

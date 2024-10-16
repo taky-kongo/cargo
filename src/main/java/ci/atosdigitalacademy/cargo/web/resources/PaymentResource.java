@@ -1,7 +1,6 @@
 package ci.atosdigitalacademy.cargo.web.resources;
 
 import ci.atosdigitalacademy.cargo.services.PaymentService;
-import ci.atosdigitalacademy.cargo.services.dto.CompanyDTO;
 import ci.atosdigitalacademy.cargo.services.dto.PaymentDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
