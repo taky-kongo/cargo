@@ -25,7 +25,7 @@ public class Seat implements Serializable {
 
     private String classe;
 
-    private String status;
+    private boolean available;
 
     private String slug;
 

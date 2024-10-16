@@ -18,6 +18,8 @@ public class PaymentDTO {
 
     private Double amount;
 
+    private String phoneNumber;
+
     private String slug;
 
     private LocalDate datePayment;
