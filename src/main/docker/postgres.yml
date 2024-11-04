@@ -7,4 +7,4 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=46U*"1oC=\[;1r;K£^171D£FzjmQ]y
     ports:
-      - "127.0.0.1:5433:5432"
+      - "127.0.0.1:5433:5432"                                                                         
