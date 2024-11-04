@@ -95,6 +95,15 @@ public class ReservationResource {
         log.debug("REST request to get all");
         return reservationService.findAll();
     }
+
+    @PostMapping()
+    @ResponseStatus(HttpStatus.OK)
+    @ApiResponse(responseCode = "201", description = "Request to cancell reservation")
+    @Operation(summary = "cancell a new reservation", description = "This endpoint allow to cancell reservation")
+    public void cancelledReservation(@RequestBody ReservationDTO reservationDTO){
+        log.debug("REST request to cancell reservation {}", reservationDTO);
+        reservationService.cancelledReservation(reservationDTO.getId());
+    }
 }
 
 
