@@ -50,6 +50,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public PaymentDTO update(PaymentDTO paymentDTO) {
         return findOne(paymentDTO.getId()).map(payment -> {
+            payment.setPhoneNumber(paymentDTO.getPhoneNumber());
             payment.setAmount(paymentDTO.getAmount());
             payment.setDatePayment(paymentDTO.getDatePayment());
             return save(payment);

@@ -23,6 +23,9 @@ public class Payment implements Serializable {
 
     private Double amount;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
     private String slug;
 
     @Column(name = "date_payment")

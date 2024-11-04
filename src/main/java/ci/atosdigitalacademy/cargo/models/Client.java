@@ -1,6 +1,7 @@
 package ci.atosdigitalacademy.cargo.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,6 @@ import java.util.List;
 @Table(name = "clients")
 public class Client extends Person {
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Reservation> reservations;
 }

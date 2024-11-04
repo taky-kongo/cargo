@@ -20,12 +20,12 @@ public class Seat implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "seat_number", unique = true)
+    @Column(name = "seat_number")
     private int seatNumber;
 
     private String classe;
 
-    private String status;
+    private boolean available;
 
     private String slug;
 

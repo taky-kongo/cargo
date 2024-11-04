@@ -20,6 +20,8 @@ public class ReservationDTO {
 
     private ReservationType status;
 
+    private int seatNumber;
+
     private String slug;
 
     private ClientDTO client;

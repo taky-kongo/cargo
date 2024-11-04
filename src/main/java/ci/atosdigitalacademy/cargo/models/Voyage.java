@@ -35,12 +35,12 @@ public class Voyage implements Serializable {
 
     private String slug;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Reservation> reservations;
 
     @ManyToOne
     private Company company;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Seat> seats;
 }

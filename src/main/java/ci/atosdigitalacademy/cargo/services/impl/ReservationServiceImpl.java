@@ -82,10 +82,25 @@ public class ReservationServiceImpl implements ReservationService {
             client = clientDTO.get();
         }
         reservationDTO.setClient(client);
+
         Optional<VoyageDTO> voyageDTO = voyageService.findOne(reservationDTO.getVoyage().getId());
-        voyageDTO.ifPresent(reservationDTO::setVoyage);
+        if (voyageDTO.isEmpty()) {
+            throw new IllegalArgumentException("Voyage id not found");
+        }
+        VoyageDTO voyage = voyageDTO.get();
+        reservationDTO.setVoyage(voyage);
+
+        int seatNumber = reservationDTO.getSeatNumber();
+        boolean seatAvailable = voyage.getSeats().stream()
+                .noneMatch(seat -> seat.getSeatNumber() == seatNumber && !seat.isAvailable());
+
+        if (!seatAvailable) {
+            throw new IllegalArgumentException("Le siège " + reservationDTO.getSeatNumber() + " n'existe pas");
+        }
+
         Optional<PaymentDTO> paymentDTO = paymentService.findOne(reservationDTO.getPayment().getId());
         paymentDTO.ifPresent(reservationDTO::setPayment);
+
         final String slug = SlugifyUtils.generate(reservationDTO.getDateReservation().toString());
         reservationDTO.setSlug(slug);
         return save(reservationDTO);

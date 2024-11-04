@@ -52,7 +52,7 @@ public class SeatServiceImpl implements SeatService {
         return findOne(seatDTO.getId()).map(seat -> {
             seat.setSeatNumber(seat.getSeatNumber());
             seat.setClasse(seat.getClasse());
-            seat.setStatus(seat.getStatus());
+            seat.setAvailable(seat.isAvailable());
             return save(seat);
         }).orElseThrow(() -> new IllegalArgumentException("Seat not found"));
     }

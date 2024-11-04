@@ -28,6 +28,9 @@ public class Reservation implements Serializable {
     @Enumerated(value = EnumType.STRING)
     private ReservationType status;
 
+    @Column(name = "seat_number")
+    private int seatNumber;
+
     private String slug;
 
     @ManyToOne

@@ -16,6 +16,6 @@ import java.util.List;
 @Table(name = "companies")
 public class Company extends Person {
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Voyage> voyages;
 }
